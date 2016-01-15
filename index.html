@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+<style>
+#mainbox
+{
+  display:none;
+position: absolute;
+left:40%;
+top: 35%;
+width: 200px;
+height:100px;
+border:2px solid #000000;
+border-radius: 25px;
+}
+#box1
+{
+  display:none;
+  position:absolute;
+    left: 40%;
+    top:15%;
+      width:200px;
+     height:100px;
+     background:red;
+     border: solid;
+     border-radius: 25px;
+}
+#box2
+{
+  display:none;
+  position:absolute;
+    left: 40%;
+    top:55%;
+      width:200px;
+     height:100px;
+     background:#3254ff;
+     border: solid;
+     border-radius: 25px;
+}
+#box3
+{
+  display:none;
+  position:absolute;
+    left: 20%;
+    top:35%;
+      width:200px;
+     height:100px;
+     background:green;
+     border: solid;
+     border-radius: 25px;
+}
+#box4
+{
+  display:none;
+  position:absolute;
+    left: 60%;
+    top:35%;
+      width:200px;
+     height:100px;
+     background:yellow;
+     border: solid;
+     border-radius: 25px;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    </head>
+    <body>
+      <div id = "ingame">
+      <div id = "interactive" style="display:none;">
+        <button id = "start" type="button" onclick="start(true)" style="position:absolute;top:70%;left:40%;width:80px;height:50px;">Start</button>
+          <h2 style="position:absolute;top:69%;left:50%;"> Time : </h2>
+        <div id = "timer">
+            <h2 id = "min" class = "minutes" style="position:absolute;top:69.25%;left:57%;">00</h2>
+            <h2  style="position:absolute;top:69%;left:60%;">:</h2>
+            <h2 id = "sec" class = "seconds" style="position:absolute;top:69.25%;left:61%;">00</h2>
+      </div>
+
+        <h2 id = "score"> Score: 0</h2>
+      </div>
+      <div id = "mainbox" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div draggable="true" ondragstart="drag(event)" id = "drag1" width = "88" height="31" style="position:relative;top:10%;left:25%;">
+          <h1 id = "question"></h1>
+        </div>
+      </div>
+        <div id = "box1" ondrop="drop(event,'t1')" ondragover="allowDrop(event)">
+            <h1 id = "t1" style="position:absolute;left:40%;top:10%;"></h1>
+        </div>
+        <div id = "box2" ondrop="drop(event,'t2')" ondragover="allowDrop(event)">
+            <h1 id = "t2" style="position:absolute;left:40%;top:10%;"></h1>
+        </div>
+        <div id = "box3" ondrop="drop(event,'t3')" ondragover="allowDrop(event)">
+            <h1 id = "t3" style="position:absolute;left:40%;top:10%;"></h1>
+        </div>
+        <div id = "box4" ondrop="drop(event,'t4')" ondragover="allowDrop(event)">
+            <h1 id = "t4" style="position:absolute;left:40%;top:10%;"></h1>
+        </div>
+      </div>
+
+
+
+          <div id = "buttons" style="position:absolute;top:30%;left:40%;">
+          <h2 style="position:relative;left:27%;">Topic: </h2>
+          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" onclick="play('add')">Addition</button>
+          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" onclick="play('subtract')">Subtraction</button>
+          <button type="button" style="width:80%;height:150%;" onclick="play('multiply')">Multiplication</button>
+        </div>
+          <div id = "radio">
+          <form action="" style="position:absolute; top:46%;left:44%;">
+                <h3> Difficulty: </h3>
+                <input type="radio" name="gender" value="male" checked>Easy<br>
+                <input type="radio" name="gender" value="female"> Medium<br>
+                <input type="radio" name="gender" value="other"> Hard<br>
+          </form>
+          <p style="position:absolute;right:0%;bottom:0%;"> Made by David Tsenter </p>
+        </div>
+
+
+
+
+        <script>
+        //COUNTDOWN:
+        function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+var t
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+      e = e || window.event;
+      if (e.keyCode == 27)
+      {
+        clearInterval(timeinterval);
+
+        mainMenu();
+      }
+}
+    t = getTimeRemaining(endtime);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+      gameover();
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+        var answer;
+        var score = 0;
+        var o1,o2,o3,o4;
+        function play (topic)
+        {
+          document.getElementById("start").disabled = false;
+          var nodes = document.getElementById("buttons").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'none';
+          }
+          var nodes = document.getElementById("radio").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'none';
+          }
+          var nodes = document.getElementById("ingame").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'block';
+          }
+        }
+        function mainMenu()
+        {
+          var nodes = document.getElementById("ingame").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'none';
+          }
+          var nodes = document.getElementById("buttons").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'block';
+          }
+          var nodes = document.getElementById("radio").getElementsByTagName('*');
+          for(var i = 0; i < nodes.length; i++)
+          {
+               nodes[i].style.display = 'block';
+          }
+          document.getElementById("sec").innerHTML = '00';
+          document.getElementById("min").innerHTML = '00';
+        }
+        function gameover()
+        {
+
+          alert("Congratulations! You got a score of: " + score);
+          mainMenu();
+        }
+        function start(first)
+        {
+          if (first == true)
+          {
+            var deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 1 * 10000);
+            initializeClock('timer', deadline);
+          }
+          document.getElementById("start").disabled = true;
+          var num1 = Math.floor((Math.random() * 100) + 1);
+          var num2 = Math.floor((Math.random() * 100) + 1);
+          document.getElementById("question").innerHTML= num1 + " + " + num2;
+          answer = num1+num2;
+          var decide = Math.floor ((Math.random()*4)+1);
+          if (decide ==1){
+            o1 = answer;
+            o2 = num1-num2;
+            o3 = num1*num2;
+            o4 = num1*2;
+          }
+          else if (decide ==2){
+            o1 = num1-num2;
+            o2 = answer;
+            o3 = num1*num2;
+            o4 = num2*2;
+          }
+          else if (decide ==3){
+            o1 = num1*num2;
+            o2 = num1-num2;
+            o3 = answer;
+            o4 = num1*2;
+          }
+          else if (decide ==4){
+            o1 = num2*2;
+            o2 = num1-num2;
+            o3 = num1*num2;
+            o4 = answer;
+          }
+          document.getElementById("t1").innerHTML = o1;
+          document.getElementById("t2").innerHTML = o2;
+          document.getElementById("t3").innerHTML = o3;
+          document.getElementById("t4").innerHTML = o4;
+        }
+        function allowDrop(ev) {
+                ev.preventDefault();
+        }
+
+        function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev,name) {
+                var num = document.getElementById(name).innerHTML;
+                if (num == answer)
+                {
+                  score++;
+                  document.getElementById("score").innerHTML = "Score = " + score;
+                  start(false);
+                }
+                else
+                {
+                  gameover();
+                }
+
+        }
+        document.onkeydown = checkKey;
+
+        function checkKey(e) {
+
+          e = e || window.event;
+
+          if (e.keyCode == '38') {
+              drop(0,'t1')
+          }
+          else if (e.keyCode == '40') {
+            drop(0,'t2')
+          }
+          else if (e.keyCode == '37') {
+       drop(0,'t3')
+          }
+          else if (e.keyCode == '39') {
+       drop(0,'t4')
+          }
+          else if (e.keyCode == 27)
+          {
+            mainMenu();
+          }
+}
+        </script>
+    </body>
+</html>
