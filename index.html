@@ -8,7 +8,7 @@
   display:none;
 position: absolute;
 left:40%;
-top: 35%;
+top: 30%;
 width: 15%;
 height:10%;
 border:2px solid #000000;
@@ -19,7 +19,7 @@ border-radius: 25px;
   display:none;
   position:absolute;
     left: 40%;
-    top:15%;
+    top:10%;
       width:15%;
      height:10%;
      background:red;
@@ -31,7 +31,7 @@ border-radius: 25px;
   display:none;
   position:absolute;
     left: 40%;
-    top:55%;
+    top:50%;
       width:15%;
      height:10%;
      background:#3254ff;
@@ -43,7 +43,7 @@ border-radius: 25px;
   display:none;
   position:absolute;
     left: 20%;
-    top:35%;
+    top:30%;
       width:15%;
      height:10%;
      background:green;
@@ -55,22 +55,61 @@ border-radius: 25px;
   display:none;
   position:absolute;
     left: 60%;
-    top:35%;
+    top:30%;
       width:15%;
      height:10%;
      background:yellow;
      border: solid;
      border-radius: 25px;
 }
+.myButton {
+	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
+	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7892c2), color-stop(1, #476e9e));
+	background:-moz-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+	background:-webkit-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+	background:-o-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+	background:-ms-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7892c2', endColorstr='#476e9e',GradientType=0);
+	background-color:#7892c2;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7892c2));
+	background:-moz-linear-gradient(top, #476e9e 5%, #7892c2 100%);
+	background:-webkit-linear-gradient(top, #476e9e 5%, #7892c2 100%);
+	background:-o-linear-gradient(top, #476e9e 5%, #7892c2 100%);
+	background:-ms-linear-gradient(top, #476e9e 5%, #7892c2 100%);
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
+	background-color:#476e9e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     </head>
     <body>
       <div id = "ingame">
       <div id = "interactive" style="display:none;">
-        <button id = "start" class = "btn btn-primary" type="button" onclick="start(true)" style="position:absolute;top:70%;left:40%;width:80px;height:50px;">Start</button>
+        <button id = "start" class = "myButton" type="button" onclick="start(true)" style="position:absolute;top:70%;left:38%;width:10%;">Start</button>
           <h2 style="position:absolute;top:69%;left:50%;"> Time : </h2>
         <div id = "timer">
             <h2 id = "min" class = "minutes" style="position:absolute;top:69.25%;left:57%;">00</h2>
@@ -80,6 +119,7 @@ border-radius: 25px;
 
         <h2 id = "score"> Score: 0</h2>
       </div>
+      <div id = "boxes">
       <div id = "mainbox" ondrop="drop(event)" ondragover="allowDrop(event)">
         <div draggable="true" ondragstart="drag(event)" id = "drag1" width = "88" height="31" style="position:relative;top:10%;left:25%;">
           <h1 id = "question"></h1>
@@ -98,18 +138,19 @@ border-radius: 25px;
             <h1 id = "t4" style="position:absolute;left:40%;top:10%;"></h1>
         </div>
       </div>
+      </div>
 
 
+          <h2 id = "top" style="position:absolute;left:52%;top:18%;">Topic: </h2>
+          <h3 id = "diff" style="position:absolute;left:52%;top:43%;"> Difficulty: </h3>
+          <div id = "buttons" style="position:absolute;top:25%;left:40%;">
 
-          <div id = "buttons" style="position:absolute;top:30%;left:40%;">
-          <h2 style="position:relative;left:27%;">Topic: </h2>
-          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" class = "btn btn-primary" onclick="play('add')">Addition</button>
-          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" class = "btn btn-primary" onclick="play('subtract')">Subtraction</button>
-          <button type="button" style="width:80%;height:150%;" class = "btn btn-primary" onclick="play('multiply')">Multiplication</button>
+          <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('add')">Addition</button>
+          <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('subtract')">Subtraction</button>
+          <button type="button" style="width:70%;height:150%;" class = "myButton" onclick="play('multiply')">Multiplication</button>
         </div>
           <div id = "radio">
-          <form action="" style="position:absolute; top:48%;left:46%;">
-                <h3> Difficulty: </h3>
+          <form action="" style="position:absolute; top:50%;left:52%;">
                 <input type="radio" name="gender" value="male" checked>Easy<br>
                 <input type="radio" name="gender" value="female"> Medium<br>
                 <input type="radio" name="gender" value="other"> Hard<br>
@@ -136,7 +177,8 @@ border-radius: 25px;
     'seconds': seconds
   };
 }
-var t
+var t;
+var timeinterval ;
 function initializeClock(id, endtime) {
   var clock = document.getElementById(id);
   var daysSpan = clock.querySelector('.days');
@@ -180,7 +222,7 @@ function initializeClock(id, endtime) {
   }
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  timeinterval = setInterval(updateClock, 1000);
 }
 
         var answer;
@@ -188,6 +230,7 @@ function initializeClock(id, endtime) {
         var o1,o2,o3,o4;
         function play (topic)
         {
+          alert("Instructions: when you press start, a question will apear in the middle (white) box. Drag it to the box containing the correct result. You may also use your arrow keys to specify the correct box. Try to get the highest score you can in the time provided!");
           document.getElementById("start").disabled = false;
           var nodes = document.getElementById("buttons").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
@@ -199,10 +242,12 @@ function initializeClock(id, endtime) {
           {
                nodes[i].style.display = 'none';
           }
+          document.getElementById("diff").innerHTML = "";
+          document.getElementById("top").innerHTML = "";
           var nodes = document.getElementById("ingame").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
-               nodes[i].style.display = 'block';
+               nodes[i].style.display = 'inline-block';
           }
         }
         function mainMenu()
@@ -215,20 +260,27 @@ function initializeClock(id, endtime) {
           var nodes = document.getElementById("buttons").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
-               nodes[i].style.display = 'initial';
+               nodes[i].style.display = 'inline-block';
           }
           var nodes = document.getElementById("radio").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
-               nodes[i].style.display = 'initial';
+               nodes[i].style.display = 'inline-block';
           }
           document.getElementById("sec").innerHTML = '00';
           document.getElementById("min").innerHTML = '00';
+          document.getElementById("diff").innerHTML = "Difficulty: ";
+          document.getElementById("top").innerHTML = "Topic: ";
         }
         function gameover()
         {
-
           alert("Congratulations! You got a score of: " + score);
+
+          document.getElementById("t1").innerHTML = "";
+          document.getElementById("t2").innerHTML = "";
+          document.getElementById("t3").innerHTML = "";
+          document.getElementById("t4").innerHTML = "";
+          document.getElementById("question").innerHTML = "";
           mainMenu();
         }
         function start(first)
@@ -246,26 +298,26 @@ function initializeClock(id, endtime) {
           var decide = Math.floor ((Math.random()*4)+1);
           if (decide ==1){
             o1 = answer;
-            o2 = num1+num2-1;
+            o2 = num1+num2-Math.floor((Math.random() * 10) + 1);
             o3 = num1*num2;
             o4 = num1*2;
           }
           else if (decide ==2){
-            o1 = num1+num2-2;
+            o1 = num1+num2-Math.floor((Math.random() * 10) + 1);
             o2 = answer;
             o3 = num1*num2;
             o4 = num2*2;
           }
           else if (decide ==3){
-            o1 = num1*num2;
-            o2 = num1+num2 - 3;
+            o1 = num1+num2- Math.floor((Math.random() * 10) + 1);
+            o2 = num1+num2 - Math.floor((Math.random() * 10) + 1);
             o3 = answer;
             o4 = num1*2;
           }
           else if (decide ==4){
             o1 = num2*2;
-            o2 = num1+num2 - 4;
-            o3 = num1*num2;
+            o2 = num1+num2 - Math.floor((Math.random() * 10) + 1);
+            o3 = num1+num2-Math.floor((Math.random() * 10) + 1);
             o4 = answer;
           }
           document.getElementById("t1").innerHTML = o1;
@@ -291,33 +343,22 @@ function initializeClock(id, endtime) {
                 }
                 else
                 {
+                clearInterval(timeinterval);
                   gameover();
                 }
 
-        }/*
+        }
         document.onkeydown = checkKey;
 
         function checkKey(e) {
 
           e = e || window.event;
 
-          if (e.keyCode == '38') {
-              drop(0,'t1')
-          }
-          else if (e.keyCode == '40') {
-            drop(0,'t2')
-          }
-          else if (e.keyCode == '37') {
-       drop(0,'t3')
-          }
-          else if (e.keyCode == '39') {
-       drop(0,'t4')
-          }
-          else if (e.keyCode == 27)
+          if (e.keyCode == 27)
           {
             mainMenu();
           }
-}*/
+}
         </script>
     </body>
 </html>
