@@ -9,8 +9,8 @@
 position: absolute;
 left:40%;
 top: 35%;
-width: 200px;
-height:100px;
+width: 15%;
+height:10%;
 border:2px solid #000000;
 border-radius: 25px;
 }
@@ -20,8 +20,8 @@ border-radius: 25px;
   position:absolute;
     left: 40%;
     top:15%;
-      width:200px;
-     height:100px;
+      width:15%;
+     height:10%;
      background:red;
      border: solid;
      border-radius: 25px;
@@ -32,8 +32,8 @@ border-radius: 25px;
   position:absolute;
     left: 40%;
     top:55%;
-      width:200px;
-     height:100px;
+      width:15%;
+     height:10%;
      background:#3254ff;
      border: solid;
      border-radius: 25px;
@@ -44,8 +44,8 @@ border-radius: 25px;
   position:absolute;
     left: 20%;
     top:35%;
-      width:200px;
-     height:100px;
+      width:15%;
+     height:10%;
      background:green;
      border: solid;
      border-radius: 25px;
@@ -56,8 +56,8 @@ border-radius: 25px;
   position:absolute;
     left: 60%;
     top:35%;
-      width:200px;
-     height:100px;
+      width:15%;
+     height:10%;
      background:yellow;
      border: solid;
      border-radius: 25px;
@@ -70,7 +70,7 @@ border-radius: 25px;
     <body>
       <div id = "ingame">
       <div id = "interactive" style="display:none;">
-        <button id = "start" type="button" onclick="start(true)" style="position:absolute;top:70%;left:40%;width:80px;height:50px;">Start</button>
+        <button id = "start" class = "btn btn-primary" type="button" onclick="start(true)" style="position:absolute;top:70%;left:40%;width:80px;height:50px;">Start</button>
           <h2 style="position:absolute;top:69%;left:50%;"> Time : </h2>
         <div id = "timer">
             <h2 id = "min" class = "minutes" style="position:absolute;top:69.25%;left:57%;">00</h2>
@@ -103,12 +103,12 @@ border-radius: 25px;
 
           <div id = "buttons" style="position:absolute;top:30%;left:40%;">
           <h2 style="position:relative;left:27%;">Topic: </h2>
-          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" onclick="play('add')">Addition</button>
-          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" onclick="play('subtract')">Subtraction</button>
-          <button type="button" style="width:80%;height:150%;" onclick="play('multiply')">Multiplication</button>
+          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" class = "btn btn-primary" onclick="play('add')">Addition</button>
+          <button type="button"  style="width:80%;height:150%;margin-bottom:10px;" class = "btn btn-primary" onclick="play('subtract')">Subtraction</button>
+          <button type="button" style="width:80%;height:150%;" class = "btn btn-primary" onclick="play('multiply')">Multiplication</button>
         </div>
           <div id = "radio">
-          <form action="" style="position:absolute; top:46%;left:44%;">
+          <form action="" style="position:absolute; top:48%;left:46%;">
                 <h3> Difficulty: </h3>
                 <input type="radio" name="gender" value="male" checked>Easy<br>
                 <input type="radio" name="gender" value="female"> Medium<br>
@@ -150,7 +150,19 @@ function initializeClock(id, endtime) {
     function checkKey(e) {
 
       e = e || window.event;
-      if (e.keyCode == 27)
+      if (e.keyCode == '38') {
+          drop(0,'t1')
+      }
+      else if (e.keyCode == '40') {
+        drop(0,'t2')
+      }
+      else if (e.keyCode == '37') {
+   drop(0,'t3')
+      }
+      else if (e.keyCode == '39') {
+   drop(0,'t4')
+      }
+      else if (e.keyCode == 27)
       {
         clearInterval(timeinterval);
 
@@ -203,12 +215,12 @@ function initializeClock(id, endtime) {
           var nodes = document.getElementById("buttons").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
-               nodes[i].style.display = 'block';
+               nodes[i].style.display = 'initial';
           }
           var nodes = document.getElementById("radio").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
-               nodes[i].style.display = 'block';
+               nodes[i].style.display = 'initial';
           }
           document.getElementById("sec").innerHTML = '00';
           document.getElementById("min").innerHTML = '00';
@@ -234,25 +246,25 @@ function initializeClock(id, endtime) {
           var decide = Math.floor ((Math.random()*4)+1);
           if (decide ==1){
             o1 = answer;
-            o2 = num1-num2;
+            o2 = num1+num2-1;
             o3 = num1*num2;
             o4 = num1*2;
           }
           else if (decide ==2){
-            o1 = num1-num2;
+            o1 = num1+num2-2;
             o2 = answer;
             o3 = num1*num2;
             o4 = num2*2;
           }
           else if (decide ==3){
             o1 = num1*num2;
-            o2 = num1-num2;
+            o2 = num1+num2 - 3;
             o3 = answer;
             o4 = num1*2;
           }
           else if (decide ==4){
             o1 = num2*2;
-            o2 = num1-num2;
+            o2 = num1+num2 - 4;
             o3 = num1*num2;
             o4 = answer;
           }
@@ -282,7 +294,7 @@ function initializeClock(id, endtime) {
                   gameover();
                 }
 
-        }
+        }/*
         document.onkeydown = checkKey;
 
         function checkKey(e) {
@@ -305,7 +317,7 @@ function initializeClock(id, endtime) {
           {
             mainMenu();
           }
-}
+}*/
         </script>
     </body>
 </html>
