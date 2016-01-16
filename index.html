@@ -115,9 +115,10 @@ border-radius: 25px;
             <h2 id = "min" class = "minutes" style="position:absolute;top:69.25%;left:57%;">00</h2>
             <h2  style="position:absolute;top:69%;left:60%;">:</h2>
             <h2 id = "sec" class = "seconds" style="position:absolute;top:69.25%;left:61%;">00</h2>
+            <p style="position:absolute;top:1%;width:25%;"><b>Instructions</b>: when you press start, a question will apear in the middle (white) box. Drag it to the box containing the correct result. You may also use your arrow keys to specify the correct box. Try to get the highest score you can in the time provided!</p>
       </div>
 
-        <h2 id = "score"> Score: 0</h2>
+        <h2 id = "score" style="position:absolute;top:10%;right:25%;"> Score: 0</h2>
       </div>
       <div id = "boxes">
       <div id = "mainbox" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -142,23 +143,15 @@ border-radius: 25px;
 
 
           <h2 id = "top" style="position:absolute;left:52%;top:18%;">Topic: </h2>
-          <h3 id = "diff" style="position:absolute;left:52%;top:43%;"> Difficulty: </h3>
           <div id = "buttons" style="position:absolute;top:25%;left:40%;">
 
           <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('add')">Addition</button>
           <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('subtract')">Subtraction</button>
           <button type="button" style="width:70%;height:150%;" class = "myButton" onclick="play('multiply')">Multiplication</button>
         </div>
-          <div id = "radio">
-          <form action="" style="position:absolute; top:50%;left:52%;">
-                <input type="radio" name="gender" value="male" checked>Easy<br>
-                <input type="radio" name="gender" value="female"> Medium<br>
-                <input type="radio" name="gender" value="other"> Hard<br>
-          </form>
           <p style="position:absolute;right:0%;bottom:0%;"> Made by David Tsenter </p>
-        </div>
 
-
+          <h1 id = "grats" style="position:absolute;left:33%;"></h1>
 
 
         <script>
@@ -226,23 +219,20 @@ function initializeClock(id, endtime) {
 }
 
         var answer;
+        var topic;
         var score = 0;
         var o1,o2,o3,o4;
         function play (topic)
         {
-          alert("Instructions: when you press start, a question will apear in the middle (white) box. Drag it to the box containing the correct result. You may also use your arrow keys to specify the correct box. Try to get the highest score you can in the time provided!");
+          document.getElementById("grats").innerHTML = "";
+          this.topic = topic;
+          //alert("Instructions: when you press start, a question will apear in the middle (white) box. Drag it to the box containing the correct result. You may also use your arrow keys to specify the correct box. Try to get the highest score you can in the time provided!");
           document.getElementById("start").disabled = false;
           var nodes = document.getElementById("buttons").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
                nodes[i].style.display = 'none';
           }
-          var nodes = document.getElementById("radio").getElementsByTagName('*');
-          for(var i = 0; i < nodes.length; i++)
-          {
-               nodes[i].style.display = 'none';
-          }
-          document.getElementById("diff").innerHTML = "";
           document.getElementById("top").innerHTML = "";
           var nodes = document.getElementById("ingame").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
@@ -252,6 +242,8 @@ function initializeClock(id, endtime) {
         }
         function mainMenu()
         {
+          document.getElementById("score").innerHTML = "Score: 0";
+          score = 0;
           var nodes = document.getElementById("ingame").getElementsByTagName('*');
           for(var i = 0; i < nodes.length; i++)
           {
@@ -262,37 +254,38 @@ function initializeClock(id, endtime) {
           {
                nodes[i].style.display = 'inline-block';
           }
-          var nodes = document.getElementById("radio").getElementsByTagName('*');
-          for(var i = 0; i < nodes.length; i++)
-          {
-               nodes[i].style.display = 'inline-block';
-          }
           document.getElementById("sec").innerHTML = '00';
           document.getElementById("min").innerHTML = '00';
-          document.getElementById("diff").innerHTML = "Difficulty: ";
           document.getElementById("top").innerHTML = "Topic: ";
-        }
-        function gameover()
-        {
-          alert("Congratulations! You got a score of: " + score);
 
           document.getElementById("t1").innerHTML = "";
           document.getElementById("t2").innerHTML = "";
           document.getElementById("t3").innerHTML = "";
           document.getElementById("t4").innerHTML = "";
           document.getElementById("question").innerHTML = "";
+
+          //document.getElementById("grats").innerHTML = "";
+        }
+        function gameover()
+        {
+          //alert("Congratulations! You got a score of: " + score);
+
+          document.getElementById("grats").innerHTML = "Congratulations, you got a score of: " + score;
           mainMenu();
         }
         function start(first)
         {
           if (first == true)
           {
-            var deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 1 * 10000);
+            var deadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 60 * 1000);
             initializeClock('timer', deadline);
           }
           document.getElementById("start").disabled = true;
           var num1 = Math.floor((Math.random() * 100) + 1);
           var num2 = Math.floor((Math.random() * 100) + 1);
+
+          if (topic == "add")
+          {
           document.getElementById("question").innerHTML= num1 + " + " + num2;
           answer = num1+num2;
           var decide = Math.floor ((Math.random()*4)+1);
@@ -320,10 +313,71 @@ function initializeClock(id, endtime) {
             o3 = num1+num2-Math.floor((Math.random() * 10) + 1);
             o4 = answer;
           }
-          document.getElementById("t1").innerHTML = o1;
-          document.getElementById("t2").innerHTML = o2;
-          document.getElementById("t3").innerHTML = o3;
-          document.getElementById("t4").innerHTML = o4;
+        }
+        else if (topic == "subtract")
+        {
+          document.getElementById("question").innerHTML= num1 + " - " + num2;
+          answer = num1-num2;
+          var decide = Math.floor ((Math.random()*4)+1);
+          if (decide ==1){
+            o1 = answer;
+            o2 = num1-num2-Math.floor((Math.random() * 10) + 1);
+            o3 = num1- 2*num1;
+            o4 = num1;
+          }
+          else if (decide ==2){
+            o1 = num1-num2-Math.floor((Math.random() * 10) + 1);
+            o2 = answer;
+            o3 = num1-num2 + Math.floor((Math.random() * 10) + 1);
+            o4 = num2;
+          }
+          else if (decide ==3){
+            o1 = num1-num2- Math.floor((Math.random() * 10) + 1);
+            o2 = num1-num2 + Math.floor((Math.random() * 10) + 1);
+            o3 = answer;
+            o4 = num1;
+          }
+          else if (decide ==4){
+            o1 = num2;
+            o2 = num1-num2 - Math.floor((Math.random() * 10) + 1);
+            o3 = num1-num2-Math.floor((Math.random() * 10) + 1);
+            o4 = answer;
+          }
+        }
+        else {
+          document.getElementById("question").innerHTML= num1 + " x " + num2;
+          var decide = Math.floor ((Math.random()*4)+1);
+          answer = num1*num2;
+          if (decide ==1){
+            o1 = answer;
+            o2 = num1*num2-Math.floor((Math.random() * 10) + 1);
+            o3 = num1*num1;
+            o4 = num1*2;
+          }
+          else if (decide ==2){
+            o1 = num1*num2-Math.floor((Math.random() * 10) + 1);
+            o2 = answer;
+            o3 = num1+num2;
+            o4 = num2*num2;
+          }
+          else if (decide ==3){
+            o1 = num1*num2- Math.floor((Math.random() * 10) + 1);
+            o2 = num1*num2 + Math.floor((Math.random() * 10) + 1);
+            o3 = answer;
+            o4 = num1*2;
+          }
+          else if (decide ==4){
+            o1 = num2*2;
+            o2 = num1*num2 - Math.floor((Math.random() * 10) + 1);
+            o3 = num1*num2 + Math.floor((Math.random() * 10) + 1);
+            o4 = answer;
+          }
+          }
+        document.getElementById("t1").innerHTML = o1;
+        document.getElementById("t2").innerHTML = o2;
+        document.getElementById("t3").innerHTML = o3;
+        document.getElementById("t4").innerHTML = o4;
+
         }
         function allowDrop(ev) {
                 ev.preventDefault();
