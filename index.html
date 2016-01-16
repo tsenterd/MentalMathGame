@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<!-- Simple Mental Math game designed to help improve computation speed. V1.0.0-->
 <html>
     <head>
 
@@ -7,7 +8,7 @@
 {
   display:none;
 position: absolute;
-left:40%;
+left:45%;
 top: 30%;
 width: 15%;
 height:10%;
@@ -18,7 +19,7 @@ border-radius: 25px;
 {
   display:none;
   position:absolute;
-    left: 40%;
+    left: 45%;
     top:10%;
       width:15%;
      height:10%;
@@ -30,7 +31,7 @@ border-radius: 25px;
 {
   display:none;
   position:absolute;
-    left: 40%;
+    left: 45%;
     top:50%;
       width:15%;
      height:10%;
@@ -42,7 +43,7 @@ border-radius: 25px;
 {
   display:none;
   position:absolute;
-    left: 20%;
+    left: 25%;
     top:30%;
       width:15%;
      height:10%;
@@ -54,7 +55,7 @@ border-radius: 25px;
 {
   display:none;
   position:absolute;
-    left: 60%;
+    left: 65%;
     top:30%;
       width:15%;
      height:10%;
@@ -109,49 +110,48 @@ border-radius: 25px;
     <body>
       <div id = "ingame">
       <div id = "interactive" style="display:none;">
-        <button id = "start" class = "myButton" type="button" onclick="start(true)" style="position:absolute;top:70%;left:38%;width:10%;">Start</button>
-          <h2 style="position:absolute;top:69%;left:50%;"> Time : </h2>
+        <button id = "start" class = "myButton" type="button" onclick="start(true)" style="position:absolute;top:70%;left:43%;width:20%;">Start</button>
         <div id = "timer">
-            <h2 id = "min" class = "minutes" style="position:absolute;top:69.25%;left:57%;">00</h2>
-            <h2  style="position:absolute;top:69%;left:60%;">:</h2>
-            <h2 id = "sec" class = "seconds" style="position:absolute;top:69.25%;left:61%;">00</h2>
-            <p style="position:absolute;top:1%;width:25%;"><b>Instructions</b>: when you press start, a question will apear in the middle (white) box. Drag it to the box containing the correct result. You may also use your arrow keys to specify the correct box. Try to get the highest score you can in the time provided!</p>
+            <h2 id = "min" class = "minutes" style="position:absolute;top:14.25%;right:15%;">00</h2>
+            <h2  style="position:absolute;top:14%;right:14%;">:</h2>
+            <h2 id = "sec" class = "seconds" style="position:absolute;top:14.25%;right:10%;">00</h2>
+            <p style="position:absolute;bottom:0%;width:65%;"><b>Instructions</b>: Use the arrow keys (or drag the question into one of the boxes) to select your answer. When ready, press start!</p>
       </div>
 
-        <h2 id = "score" style="position:absolute;top:10%;right:25%;"> Score: 0</h2>
+        <h2 id = "score" style="position:absolute;top:5%;right:10%;"> Score: 0</h2>
       </div>
       <div id = "boxes">
       <div id = "mainbox" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <div draggable="true" ondragstart="drag(event)" id = "drag1" width = "88" height="31" style="position:relative;top:10%;left:25%;">
-          <h1 id = "question"></h1>
+        <div draggable="true" ondragstart="drag(event)" id = "drag1" width = "88" height="31" style="position:absolute;top:-15%;left:30%;">
+          <h3 id = "question"></h3>
         </div>
       </div>
         <div id = "box1" ondrop="drop(event,'t1')" ondragover="allowDrop(event)">
-            <h1 id = "t1" style="position:absolute;left:40%;top:10%;"></h1>
+            <h3 id = "t1" style="position:absolute;left:40%;top:-15%;"></h3>
         </div>
         <div id = "box2" ondrop="drop(event,'t2')" ondragover="allowDrop(event)">
-            <h1 id = "t2" style="position:absolute;left:40%;top:10%;"></h1>
+            <h3 id = "t2" style="position:absolute;left:40%;top:-15%;"></h3>
         </div>
         <div id = "box3" ondrop="drop(event,'t3')" ondragover="allowDrop(event)">
-            <h1 id = "t3" style="position:absolute;left:40%;top:10%;"></h1>
+            <h3 id = "t3" style="position:absolute;left:40%;top:-15%;"></h3>
         </div>
         <div id = "box4" ondrop="drop(event,'t4')" ondragover="allowDrop(event)">
-            <h1 id = "t4" style="position:absolute;left:40%;top:10%;"></h1>
+            <h3 id = "t4" style="position:absolute;left:40%;top:-15%;"></h3>
         </div>
       </div>
       </div>
 
-
-          <h2 id = "top" style="position:absolute;left:52%;top:18%;">Topic: </h2>
-          <div id = "buttons" style="position:absolute;top:25%;left:40%;">
+          <h2 id = "top" style="position:absolute;left:40%;top:15%;">Mental Math Game</h2>
+          <div id = "buttons" style="position:absolute;top:30%;left:30%;">
 
           <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('add')">Addition</button>
           <button type="button"  style="width:70%;height:150%;margin-bottom:10px;" class = "myButton" onclick="play('subtract')">Subtraction</button>
           <button type="button" style="width:70%;height:150%;" class = "myButton" onclick="play('multiply')">Multiplication</button>
         </div>
+          <h1> </h1>
           <p style="position:absolute;right:0%;bottom:0%;"> Made by David Tsenter </p>
 
-          <h1 id = "grats" style="position:absolute;left:33%;"></h1>
+          <h2 id = "grats" style="position:absolute;left:33%;"></h2>
 
 
         <script>
@@ -256,14 +256,13 @@ function initializeClock(id, endtime) {
           }
           document.getElementById("sec").innerHTML = '00';
           document.getElementById("min").innerHTML = '00';
-          document.getElementById("top").innerHTML = "Topic: ";
 
           document.getElementById("t1").innerHTML = "";
           document.getElementById("t2").innerHTML = "";
           document.getElementById("t3").innerHTML = "";
           document.getElementById("t4").innerHTML = "";
           document.getElementById("question").innerHTML = "";
-
+          document.getElementById("top").innerHTML = "Mental Math Game";
           //document.getElementById("grats").innerHTML = "";
         }
         function gameover()
